@@ -119,11 +119,6 @@ def generate_launch_description():
       get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py'))
   )
 
-  start_joy = IncludeLaunchDescription(
-    PythonLaunchDescriptionSource(os.path.join(
-      get_package_share_directory('joy'), 'launch', 'joy-launch.py'))
-  )
-
   start_vehicle_simulator = Node(
     package='vehicle_simulator', 
     executable='vehicleSimulator',
@@ -201,7 +196,6 @@ def generate_launch_description():
   ld.add_action(spawn_lidar)
   ld.add_action(spawn_robot)
   ld.add_action(spawn_camera)
-  ld.add_action(start_joy)
   ld.add_action(delayed_start_vehicle_simulator)
 
   return ld

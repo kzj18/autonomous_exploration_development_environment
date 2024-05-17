@@ -87,6 +87,11 @@ def generate_launch_description():
     }.items()
   )
 
+  start_joy = IncludeLaunchDescription(
+    PythonLaunchDescriptionSource(os.path.join(
+      get_package_share_directory('joy'), 'launch', 'joy-launch.py'))
+  )
+
   rviz_config_file = os.path.join(get_package_share_directory('vehicle_simulator'), 'rviz', 'vehicle_simulator.rviz')
   start_rviz = Node(
     package='rviz2',
@@ -122,6 +127,7 @@ def generate_launch_description():
   ld.add_action(start_vehicle_simulator)
   ld.add_action(start_sensor_scan_generation)
   ld.add_action(start_visualization_tools)
+  ld.add_action(start_joy)
   ld.add_action(delayed_start_rviz)
 
   return ld
