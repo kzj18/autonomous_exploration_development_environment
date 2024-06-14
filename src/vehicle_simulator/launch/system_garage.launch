@@ -87,9 +87,16 @@ def generate_launch_description():
     }.items()
   )
 
-  start_joy = IncludeLaunchDescription(
-    PythonLaunchDescriptionSource(os.path.join(
-      get_package_share_directory('joy'), 'launch', 'joy-launch.py'))
+  start_joy = Node(
+    package='joy', 
+    executable='joy_node',
+    name='ps3_joy',
+    output='screen',
+    parameters=[{
+                'dev': "/dev/input/js0",
+                'deadzone': 0.12,
+                'autorepeat_rate': 0.0,
+  		}]
   )
 
   rviz_config_file = os.path.join(get_package_share_directory('vehicle_simulator'), 'rviz', 'vehicle_simulator.rviz')
